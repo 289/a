@@ -1,0 +1,27 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AddCashRequest
+{
+	required int64 roleid = 1;
+	required int32 cash = 2;
+	required string rpc_id = 3;
+}
+
+message AddCashResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		PARAM_ERR = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service AddCashService
+{
+	rpc HandleAddCash (AddCashRequest) returns (AddCashResponse);
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BehaviorTree TreeId="111">
+	<Node Name="Root_node" Type="Root" Node_id="1" >
+			<Node Name="Selector0" Type="Selector" Node_id="2" >
+					<Node Name="Sequence0" Type="Sequence" Node_id="3" >
+							<Node Name="isAnyEnemyVisible" Operation="ConditionSuccessful" Type="Condition" Node_id="4" />
+							<Node Name="FireWeaponAtEnemy" Operation="Nop" Type="Action" Node_id="5" />
+					</Node>
+					<Node Name="Idle" Operation="Nop" Type="Action" Node_id="6" />
+			</Node>
+	</Node>
+</BehaviorTree>

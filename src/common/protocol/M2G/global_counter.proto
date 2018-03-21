@@ -1,0 +1,27 @@
+package common.protocol.M2G;
+
+message GlobalCounterInfo
+{
+	message GCInfo
+	{
+		required int32 index = 1;
+		required int32 value = 2;
+	}
+
+	required int32 master_id = 1;
+	repeated GCInfo gc_info  = 2;
+}
+
+message ModifyGlobalCounter
+{
+	required int32 master_id = 1;
+	required int32 index = 2;
+	required int32 delta = 3; // 变化的值，正数表示增加，负数表示减少
+}
+
+message SetGlobalCounter
+{
+	required int32 master_id = 1;
+    required int32 index = 2;
+    required int32 value = 3; // 赋值
+}

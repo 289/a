@@ -1,0 +1,14 @@
+package gamedbRpc;
+
+message AuctionOrder
+{
+	required int64 auction_id = 1;
+	required int64 seller = 2;
+	required int64 bidder = 3;
+	required int32 currency_type = 4;
+	required int32 buyout_price = 5;
+	required int32 bid_price = 6;
+	required int32 item_id = 7;
+	required bytes item_info = 8;
+	required bytes item_name = 9;
+}

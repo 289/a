@@ -1,0 +1,42 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/libmasterproto-pb.a
+
+
+SUBDIRS      = ./gen/global ./gen/L2M ./gen/M2L ./gen/G2M ./gen/M2G ./gen/M2A ./gen/A2M ./gen/M2D ./gen/D2M ./gen/web
+GLOBAL_OBJS  = ./gen/global/build/*.o
+L2M_OBJS     = ./gen/L2M/build/*.o
+M2L_OBJS     = ./gen/M2L/build/*.o
+G2M_OBJS     = ./gen/G2M/build/*.o
+M2G_OBJS     = ./gen/M2G/build/*.o
+M2A_OBJS 	 = ./gen/M2A/build/*.o
+A2M_OBJS 	 = ./gen/A2M/build/*.o
+M2D_OBJS 	 = ./gen/M2D/build/*.o
+D2M_OBJS 	 = ./gen/D2M/build/*.o
+WEB_OBJS  	 = ./gen/web/build/*.o
+SUBOBJ       = $(GLOBAL_OBJS) $(L2M_OBJS) $(M2L_OBJS) $(G2M_OBJS) $(M2G_OBJS) $(M2A_OBJS) $(A2M_OBJS) $(M2D_OBJS) $(D2M_OBJS) $(WEB_OBJS)
+
+all : masterlib
+
+masterlib : $(SUBDIRS)
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIRS): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) dep;))
+

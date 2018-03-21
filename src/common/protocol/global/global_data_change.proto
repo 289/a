@@ -1,0 +1,16 @@
+package common.protocol.global;
+
+message GlobalDataChange
+{
+	enum OpType
+	{
+		OP_ADD    = 1;
+		OP_MODIFY = 2;
+		OP_DELETE = 3;
+	};
+
+	required int32 gdtype  = 1;
+	required int64 key     = 2;
+	required OpType optype = 3;
+	optional bytes content = 4;
+}

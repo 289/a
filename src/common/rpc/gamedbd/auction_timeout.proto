@@ -1,0 +1,27 @@
+import "gamedbd/auction_order.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AuctionTimeoutRequest
+{
+	required int64 auction_id = 1;
+}
+
+message AuctionTimeoutResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NO_AUCTION = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service AuctionTimeoutService
+{
+	rpc HandleAuctionTimeout (AuctionTimeoutRequest) returns (AuctionTimeoutResponse);
+}

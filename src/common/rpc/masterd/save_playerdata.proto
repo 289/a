@@ -1,0 +1,34 @@
+package masterRpc;
+
+option cc_generic_services = true;
+
+message SavePlayerDataProxyRequest
+{
+	enum SaveReason
+	{
+		PLAYER_LOGOUT    = 0;
+		PLAYER_HEARTBEAT = 1;
+	}
+
+	required int64 userid = 1;
+	required int64 roleid = 2;
+	required bytes content = 3;
+	required SaveReason reason = 4 [default = PLAYER_LOGOUT];
+}
+
+message SavePlayerDataProxyResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		ROLE_NOTFOUND = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service SavePlayerDataProxyService
+{
+	rpc HandleSavePlayerDataProxy (SavePlayerDataProxyRequest) returns (SavePlayerDataProxyResponse);
+}

@@ -1,0 +1,29 @@
+package masterRpc;
+
+option cc_generic_services = true;
+
+message AuctionBuyoutProxyRequest
+{
+	required int64 auction_id = 1;
+	required int64 buyer = 2;
+	required int32 currency_type = 3;
+	required int32 price = 4;
+}
+
+message AuctionBuyoutProxyResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NO_AUCTION = 2;
+		PARAM_ERR = 3;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service AuctionBuyoutProxyService
+{
+	rpc HandleAuctionBuyoutProxy (AuctionBuyoutProxyRequest) returns (AuctionBuyoutProxyResponse);
+}

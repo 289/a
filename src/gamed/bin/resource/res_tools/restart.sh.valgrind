@@ -1,0 +1,9 @@
+#killall gs
+#./gs >1.log 2>&1 &
+ps -aux | grep gs | awk '{print $2}' | xargs kill -9
+
+valgrind --log-file=./valgrind.log  --leak-check=full ./gs gs.conf gmserver.conf gsalias.conf  >1.log 2>&1 &
+valgrind --log-file=./valgrind2.log --leak-check=full ./gs gs.conf gmserver.conf gsalias2.conf >2.log 2>&1 &
+valgrind --log-file=./valgrind3.log --leak-check=full ./gs gs.conf gmserver.conf gsalias3.conf >3.log 2>&1 &
+valgrind --log-file=./valgrind4.log --leak-check=full ./gs gs.conf gmserver.conf gsalias4.conf >4.log 2>&1 &
+

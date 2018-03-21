@@ -1,0 +1,27 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message KeyEstablishRequest
+{
+	required int64 userid = 1;
+	required string imei = 2;
+	required string rpcid = 3;
+}
+
+message KeyEstablishResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		NO_SESSIONKEY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required string session_key = 2;
+}
+
+service KeyEstablishService
+{
+	rpc HandleKeyEstablish (KeyEstablishRequest) returns (KeyEstablishResponse);
+}

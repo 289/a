@@ -1,0 +1,6 @@
+package common.scalable;
+
+message PCMonthlyAwardGot
+{
+    repeated int32 cumulative = 1;
+}

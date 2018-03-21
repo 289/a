@@ -1,0 +1,21 @@
+SOLUTION_ROOT_DIR = ../../../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+
+include $(SOLUTION_ROOT_DIR)/shared/mk/gcc.defs.mk
+
+SRC_PATH  = ./
+INCLUDES += -I../
+
+PROTOCOL_SRCS =  \
+		   $(wildcard $(SRC_PATH)/*.cc)
+
+
+all : lib
+
+include $(SOLUTION_ROOT_DIR)/shared/mk/gcc.build.protocol.mk
+
+lib : $(PROTOCOL_O)
+

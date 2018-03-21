@@ -1,0 +1,24 @@
+package common.protocol.global;
+
+message ServerInfo
+{
+	enum Type
+	{
+		TYPE_NONE       = 0;
+		LINK_SVR        = 1;
+		MASTER_SVR      = 2;
+		GAMESERVER_SVR  = 3;
+	}
+
+	enum Status
+	{
+		STATUS_NONE  = 1;
+		SVR_SHUTDOWN = 2;
+	}
+}
+
+message ServerStatusNotify
+{
+	required ServerInfo.Type type     = 1 [default = TYPE_NONE];
+	required ServerInfo.Status status = 2 [default = STATUS_NONE];
+}

@@ -1,0 +1,13 @@
+package common.scalable;
+
+message CoolDownList
+{
+    message Entry
+    {
+        required int32 id          = 1;
+        required int32 interval    = 2;
+        required int64 expire_time = 3;
+    }
+
+    repeated Entry cd_entry = 1;
+}

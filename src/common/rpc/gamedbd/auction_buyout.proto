@@ -1,0 +1,27 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AuctionBuyoutRequest
+{
+	required int64 auction_id = 1;
+	required int64 buyer = 2;
+	required string rpc_id = 3;
+}
+
+message AuctionBuyoutResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NO_AUCTION = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service AuctionBuyoutService
+{
+	rpc HandleAuctionBuyout (AuctionBuyoutRequest) returns (AuctionBuyoutResponse);
+}

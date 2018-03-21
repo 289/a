@@ -1,0 +1,32 @@
+import "gamedbd/wb_record.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SaveWBRecordRequest
+{
+    enum SaveOp
+    {
+        SAVE_MODIFY = 0;
+        SAVE_DEL = 1;
+    }
+    required int32 save_op = 1;
+	repeated WBRecord record_list = 3;
+}
+
+message SaveWBRecordResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service SaveWBRecordService
+{
+	rpc HandleSaveWBRecord (SaveWBRecordRequest) returns (SaveWBRecordResponse);
+}

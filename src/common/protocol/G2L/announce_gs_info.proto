@@ -1,0 +1,6 @@
+package common.protocol.G2L;
+
+message AnnounceGSInfo
+{
+	required int32 gsid = 1;
+}

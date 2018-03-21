@@ -1,0 +1,20 @@
+package common.scalable;
+
+message EssRefine
+{
+    optional int32 refine_tid = 1;
+    optional int32 refine_lvl = 2;
+}
+
+message EssPetProp
+{
+    optional int32 pet_exp = 1;
+    optional int32 pet_level = 2;
+    optional int32 pet_blevel = 3;
+}
+
+message EssCard
+{
+    optional int32 card_exp = 1;
+    optional int32 star_id = 2;
+}

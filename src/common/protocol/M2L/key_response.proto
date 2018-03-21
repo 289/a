@@ -1,0 +1,16 @@
+package common.protocol.M2L;
+
+message KeyResponse
+{
+	enum ErrorCode
+	{
+		ERR_SUCCESS = 0;
+		ERR_KEY = 1;
+		ERR_MASTERID = 2;
+	}
+
+	required ErrorCode error = 1;
+	required int64 userid = 2;
+	required bytes key = 3;
+	required int32 client_sid = 4;
+}

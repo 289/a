@@ -1,0 +1,16 @@
+package common.protocol.G2L;
+
+message S2CMulticast
+{
+	message PlayerInfo
+	{
+		required int64 roleid             = 1;
+		required int32 client_sid_in_link = 2;
+	}
+
+	required int32 cmd_type_no      = 1;
+	required int32 link_id          = 2;
+	required bytes content          = 3;
+
+	repeated PlayerInfo player_list = 4;
+}

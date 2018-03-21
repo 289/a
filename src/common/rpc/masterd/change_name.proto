@@ -1,0 +1,39 @@
+package masterRpc;
+
+option cc_generic_services = true;
+
+enum NameType
+{
+	NAME_INVALID  = -1;
+	NAME_FIRST    = 0;
+	NAME_MID      = 1;
+	NAME_LAST     = 2;
+    NAME_TYPE_MAX = 3;
+}
+
+message ChangeNameProxyRequest
+{
+	required int64 roleid = 1;
+	required NameType type = 2 [default = NAME_INVALID];
+	required bytes name = 3;
+}
+
+message ChangeNameProxyResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		ROLE_NOTFOUND = 2;
+		NAME_EXIST = 3;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required NameType type = 2 [default = NAME_INVALID];
+	required bytes name = 3;
+}
+
+service ChangeNameProxyService
+{
+	rpc HandleChangeNameProxy (ChangeNameProxyRequest) returns (ChangeNameProxyResponse);
+}

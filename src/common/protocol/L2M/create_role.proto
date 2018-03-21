@@ -1,0 +1,11 @@
+package common.protocol.L2M;
+
+message CreateRole
+{
+	required int64 userid = 1;
+	required bytes rolename = 2;
+	required int32 gender = 3;
+	required int32 occupation = 4;
+	required int32 masterid = 5;
+	required int32 client_sid = 6;
+}

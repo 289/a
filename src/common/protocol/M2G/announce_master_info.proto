@@ -1,0 +1,8 @@
+package common.protocol.M2G;
+
+message AnnounceMasterInfo
+{
+	required int32 master_id = 1;
+    repeated int32 server_in_charge = 2; // 合服后使用，标明是原有哪些服合并在一起的，填原服的masterid
+                                         // 不包含自己（上面的master_id）
+}

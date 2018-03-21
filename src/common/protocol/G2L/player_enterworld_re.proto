@@ -1,0 +1,13 @@
+package common.protocol.G2L;
+
+message PlayerEnterWorld_Re
+{
+	required int64 roleid = 1;
+	required int32 client_sid_in_link = 2;
+}
+
+message PlayerEnterWorldAgain
+{
+	required int64 roleid = 1;
+	required int32 client_sid_in_link = 2;
+}

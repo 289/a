@@ -1,0 +1,25 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+CURRENT_PROJECT_DIR = $(SOLUTION_ROOT_DIR)/shared/lua
+
+include $(SOLUTION_ROOT_DIR)/shared/mk/gcc.defs.mk
+
+EXES_NAME = libluaengine.so
+EXES = $(EXES_NAME)
+
+INCLUDES += -I./ -I$(CURRENT_PROJECT_DIR)
+
+EXESRCS = \
+		  $(CURRENT_PROJECT_DIR)/lua_value.cpp \
+		  $(CURRENT_PROJECT_DIR)/lua_engine.cpp \
+
+all : $(EXES)
+
+include $(SOLUTION_ROOT_DIR)/shared/mk/gcc.build.exe.mk
+
+$(EXES) : $(EXE_O)
+	$(LD) $(LDFLAGS) -fPIC -shared -o $@ $(addprefix ./,$^)
+

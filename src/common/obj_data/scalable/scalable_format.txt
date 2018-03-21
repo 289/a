@@ -1,0 +1,41 @@
+scalable是使用protobuf作为流的序列化反序列化方式使用，可以使PlayerData的属性里以string保存的数据能Backwards-compatibility，上线以后还能动态增加字段。
+为了达到这个效果，编写scalable类型的数据时需仔细阅读以下说明：
+
+
+（1）文档1
+https://developers.google.com/protocol-buffers/docs/cpptutorial
+
+Extending a Protocol Buffer
+
+Sooner or later after you release the code that uses your protocol buffer, you will undoubtedly want to "improve" the protocol buffer's definition. If you want your new buffers to be backwards-compatible, and your old buffers to be forward-compatible – and you almost certainly do want this – then there are some rules you need to follow. In the new version of the protocol buffer:
+
+you must not change the tag numbers of any existing fields.
+you must not add or delete any required fields.
+you may delete optional or repeated fields.
+you may add new optional or repeated fields but you must use fresh tag numbers (i.e. tag numbers that were never used in this protocol buffer, not even by deleted fields).
+(There are some exceptions to these rules, but they are rarely used.)
+
+If you follow these rules, old code will happily read new messages and simply ignore any new fields. To the old code, optional fields that were deleted will simply have their default value, and deleted repeated fields will be empty. New code will also transparently read old messages. However, keep in mind that new optional fields will not be present in old messages, so you will need to either check explicitly whether they're set with has_, or provide a reasonable default value in your .proto file with [default = value] after the tag number. If the default value is not specified for an optional element, a type-specific default value is used instead: for strings, the default value is the empty string. For booleans, the default value is false. For numeric types, the default value is zero. Note also that if you added a new repeated field, your new code will not be able to tell whether it was left empty (by new code) or never set at all (by old code) since there is no has_ flag for it.
+
+
+（2）文档2
+https://developers.google.com/protocol-buffers/docs/proto
+
+Backwards-compatibility issues
+
+Be careful when adding or removing oneof fields. If checking the value of a oneof returns None/NOT_SET, it could mean that the oneof has not been set or it has been set to a field in a different version of the oneof. There is no way to tell the difference, since there's no way to know if an unknown field on the wire is a member of the oneof.
+
+Tag Reuse Issues
+
+Move optional fields into or out of a oneof: You may lose some of your information (some fields will be cleared) after the message is serialized and parsed.
+Delete a oneof field and add it back: This may clear your currently set oneof field after the message is serialized and parsed.
+Split or merge oneof: This has similar issues to moving regular optional fields.
+
+
+（3）总结
+a.不能改变已有项的数字编号tag numbers
+b.不能增加或者删除required项
+c.可以删除optional或者repeated项
+d.可以增加optional或者repeated项，但必须使用新的数字编号
+
+一般来说只做增加optional、repeated项

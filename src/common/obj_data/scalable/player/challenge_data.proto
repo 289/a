@@ -1,0 +1,18 @@
+package common.scalable;
+
+message ChallengeData
+{
+    message BossEntry
+    {
+        required int32 monster_gid = 1; 
+        required int32 challenge_info = 2; 
+    }
+
+    message ChallengeInfo
+    {
+        required int32 challenge_id = 1;
+        repeated BossEntry boss_list = 2;
+    }
+
+    repeated ChallengeInfo challenge_list = 1;
+}

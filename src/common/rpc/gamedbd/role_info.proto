@@ -1,0 +1,18 @@
+package gamedbRpc;
+
+message RoleInfo
+{
+	required int64 roleid = 1;
+	required int64 userid = 2;
+	required bytes first_name = 3;
+	required bytes mid_name = 4;
+	required bytes last_name = 5;
+	required int32 gender = 6;
+	required int32 roleclass = 7;
+	required int32 race = 8;
+	required int32 level = 9;
+	required int32 create_time = 10;
+	required int32 delete_time = 11;
+	required int32 weapon = 12;
+	required int32 combat_value = 13;
+}

@@ -1,0 +1,32 @@
+package common.protocol.G2M;
+
+message QueryAuctionList
+{
+	required int64 roleid = 1;
+	required int32 category = 2;
+	required int32 currency_type = 3;
+}
+
+message QueryAuctionDetail
+{
+	required int64 roleid = 1;
+	repeated int64 auction_id = 2;
+}
+
+message QueryPlayerBidItem
+{
+    message Info
+    {
+        required int64 auction_id = 1;
+        required int32 self_bid_price = 2;
+    }
+
+    required int64 roleid = 1;
+    repeated Info  info_list = 2;
+}
+
+message QueryAuctionBidPrice
+{
+	required int64 roleid = 1;
+	repeated int64 auction_id = 2;
+}

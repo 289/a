@@ -1,0 +1,17 @@
+import "global/instance_msg.proto";
+import "global/battleground_msg.proto";
+import "M2G/team_msg.proto";
+
+package common.protocol.M2G;
+
+message PlayerEnterWorld
+{
+	required int64 userid  = 1;
+	required int64 roleid  = 2;
+	required int32 link_id = 3;
+	required int32 client_sid_in_link = 4;
+	required bytes content = 5;
+	optional TeamInfo team_info = 6;
+	optional common.protocol.global.InstanceInfo ins_info = 7;
+    optional common.protocol.global.BattleGroundInfo bg_info = 8;
+}

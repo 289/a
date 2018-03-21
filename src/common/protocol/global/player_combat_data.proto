@@ -1,0 +1,51 @@
+package common.protocol.global;
+
+
+message PlayerCombatData
+{
+    message SkillTree
+    {
+        required int32 skill_tree_id = 1;
+        required int32 skill_id      = 2;
+        required int32 level         = 3;
+        required int32 tmp_level     = 4;
+        required int32 max_level     = 5;
+    }
+
+    message PetEntry
+    {
+        required int32 pet_id         = 1;
+        required int32 pet_rank       = 2;
+        required int32 pet_blevel     = 3;
+        required int32 pet_item_idx   = 4;
+        required int32 pet_combat_pos = 5;
+    }
+
+    message PetData
+    {
+        required int32 pet_power           = 1;
+        required int32 pet_power_cap       = 2;
+        required int32 pet_power_gen_speed = 3;
+        required int32 pet_attack_cd_time  = 4;
+        repeated PetEntry pet_vec          = 5;
+    }
+
+    required int64 roleid             = 1;
+    required bytes name               = 2;
+    required int32 pos                = 3;
+    required int32 cls                = 4;
+    required int32 gender             = 5;
+    required int32 level              = 6;
+    required int32 master_id          = 7;
+    required int32 weapon_id          = 8;
+    required int32 normal_atk_id      = 9;
+    required int32 hp                 = 10;
+    required int32 mp                 = 11;
+    required int32 ep                 = 12;
+    required int32 dying_time         = 13;
+    required bytes cls_model_src      = 14;
+    required PetData pet_data         = 15;
+    repeated int32 props              = 16;
+    repeated int32 addon_skills       = 17;
+    repeated SkillTree skill_tree_vec = 18;
+}

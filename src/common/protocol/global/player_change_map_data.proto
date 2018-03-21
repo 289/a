@@ -1,0 +1,16 @@
+package common.protocol.global;
+
+message PlayerChangeMapData
+{
+	required int32 src_mapid  = 1;  // 原地图id
+	required float src_x      = 2;  // 原地图x坐标
+	required float src_y      = 3;  // 原地图y坐标
+	required int32 des_mapid  = 4;  // 目标地图id
+	required float des_x      = 5;  // 目标地图x坐标
+	required float des_y      = 6;  // 目标地图y坐标
+	required int64 roleid     = 7;
+	required int32 link_id    = 8;
+	required int32 client_sid_in_link = 9;
+	required bytes content    = 10;  // PlayerData
+}
+

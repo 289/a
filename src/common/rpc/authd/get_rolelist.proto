@@ -1,0 +1,35 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message GetRoleListRequest
+{
+	required int64 userid = 1;
+	required int32 client_sid = 2;
+}
+
+message GetRoleListResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	message BaseRoleInfo
+	{
+		required int64 roleid = 1;
+		required string rolename = 2;
+		required int32 occupation = 3;
+		required int32 level = 4;
+		required int32 serverid = 5;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated BaseRoleInfo rolelist = 2;
+}
+
+service GetRoleListService
+{
+	rpc HandleRoleList (GetRoleListRequest) returns (GetRoleListResponse);
+}

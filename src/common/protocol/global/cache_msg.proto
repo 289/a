@@ -1,0 +1,28 @@
+package common.protocol.global;
+
+enum QueryType
+{
+    QUERY_GS = 0;
+    QUERY_RANK = 0x80;
+};
+
+message QueryRoleInfo
+{
+    required int32 type = 1;
+    required int64 querier = 2;
+    repeated int64 role_list = 3;
+}
+
+message QueryRoleInfoRe
+{
+    required int32 type = 1;
+    required int64 querier = 2;
+    repeated int64 role_list = 3;
+    repeated bytes info_list = 4;
+}
+
+message UpdateRoleInfo
+{
+    required int64 roleid = 1;
+    required bytes info = 2;
+}

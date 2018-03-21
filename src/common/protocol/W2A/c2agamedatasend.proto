@@ -1,0 +1,9 @@
+package common.protocol.W2A;
+
+message C2AGamedataSend
+{
+	required int32 cmd_type_no = 1;
+	required int32 client_sid = 2;
+	required bytes key = 3;
+	required bytes content     = 4;
+}

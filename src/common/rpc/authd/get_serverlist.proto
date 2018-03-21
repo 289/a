@@ -1,0 +1,35 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message GetServerListRequest
+{
+	required int32 client_sid = 1;
+}
+
+message GetServerListResponse
+{
+	message ZoneInfo
+	{
+		required int32 zoneid = 1;
+		required string zone_name = 2;
+	}
+
+	message MasterInfo
+	{
+		required int32 zoneid = 1;
+		required int32 masterid = 2;
+		required string master_name = 3;
+		required string comment = 4;
+		required int32 flag = 5;
+		required string address = 6;
+	}
+
+	repeated ZoneInfo zonelist = 1;
+	repeated MasterInfo masterlist = 2;
+}
+
+service GetServerListService
+{
+	rpc HandleServerList (GetServerListRequest) returns (GetServerListResponse);
+}

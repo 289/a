@@ -1,0 +1,15 @@
+package common.protocol.D2M;
+
+message AnnounceNewMail
+{
+	required int64 mailid = 1;
+	required int64 sender = 2;
+	required int64 receiver = 3;
+	required int32 attach_cash = 4;
+	required int32 attach_score = 5;
+	required bytes name = 6;
+	required bytes title = 7;
+	required bytes content = 8;
+	required bytes attach_item = 9;
+	required int32 time = 10;
+}

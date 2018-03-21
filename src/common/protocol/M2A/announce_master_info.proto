@@ -1,0 +1,13 @@
+package common.protocol.M2A;
+
+message AnnounceMasterInfo
+{
+	message MasterInfo
+	{
+		required int32 masterid = 1;
+		required int32 start_time = 2;
+	}
+
+	required int32 zoneid = 1;
+	repeated MasterInfo master_info = 2;
+}

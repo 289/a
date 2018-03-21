@@ -1,0 +1,33 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/libgcacheproto-pb.a
+
+
+SUBDIRS      = ./gen/global
+GLOBAL_OBJS  = ./gen/global/build/*.o
+SUBOBJ       = $(GLOBAL_OBJS)
+
+all : gcachelib
+
+gcachelib : $(SUBDIRS)
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIRS): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) dep;))
+

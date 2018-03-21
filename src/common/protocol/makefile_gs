@@ -1,0 +1,38 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/libgsproto-pb.a
+
+
+SUBDIRS      = ./gen/global ./gen/G2M ./gen/M2G ./gen/G2L ./gen/L2G
+GLOBAL_OBJS  = ./gen/global/build/*.o
+G2M_OBJS     = ./gen/G2M/build/*.o
+M2G_OBJS     = ./gen/M2G/build/*.o
+G2L_OBJS     = ./gen/G2L/build/*.o
+L2G_OBJS     = ./gen/L2G/build/*.o
+SUBOBJ       = $(GLOBAL_OBJS) $(G2M_OBJS) $(M2G_OBJS) $(G2L_OBJS) $(L2G_OBJS)
+
+
+all : gslib
+
+gslib : $(SUBDIRS)
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIRS): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) dep;))
+

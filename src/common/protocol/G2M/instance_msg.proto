@@ -1,0 +1,131 @@
+import "global/instance_msg.proto";
+
+package common.protocol.G2M;
+
+enum InstanceType
+{
+	IT_SOLO  = 1;
+	IT_TEAM  = 2;
+	IT_UNION = 3;
+}
+
+enum InsRequestType
+{
+	IRT_TRANSFER    = 1; // 通过传送进入副本
+	IRT_UI_SOLO     = 2; // 通过UI进入单人副本，处理方法和传送一样
+	IRT_UI_TEAM     = 3; // 通过UI进入组队副本
+	IRT_UI_CR_TEAM  = 4; // 通过UI进入跨服组队副本
+	IRT_TASK_SOLO   = 5; // 通过任务传送进入单人副本，master处理方式与IRT_TRANSFER一致
+}
+
+message InsReenter
+{
+	required int64 ins_serial_num  = 1;
+	required int32 world_id        = 2;
+	required int32 world_tag       = 3;
+	required int64 ins_create_time = 4;
+}
+
+// cross instance request teammate info
+message CIRTeammateInfo
+{
+    required int64 roleid         = 1;
+    required int32 src_world_id   = 2;
+    required float src_pos_x      = 3;
+    required float src_pos_y      = 4;
+    required common.protocol.global.PCrossInsInfo detail = 5;
+}
+
+message EnterInsRequest
+{
+	required int32 des_world_id       = 1;
+	required InstanceType ins_type    = 2;
+	required InsRequestType req_type  = 3;
+	required int64 roleid             = 4;
+	required int32 ins_templ_id       = 5;
+	required int32 src_world_id       = 6;
+	required float src_pos_x          = 7;
+	required float src_pos_y          = 8;
+	optional InsReenter reenter       = 9;
+	optional common.protocol.global.PCrossInsInfo cross_info = 10;
+    repeated CIRTeammateInfo members  = 11; // 队长按照队伍进行报名时需要带上队友信息，master需要检查这些玩家是否在线
+}
+
+message NotifyInsStatus
+{
+	enum InsStatus
+	{
+		INS_CREATE = 1;
+		INS_CLOSE  = 2;
+	};
+
+	required InstanceType ins_type = 1;
+	required InsStatus ins_status  = 2;
+	required int32 world_id        = 3;
+	required int32 world_tag       = 4;
+	required int32 ins_templ_id    = 5;
+	required int64 ins_create_time = 6;
+	required int64 ins_serial_num  = 7;
+}
+
+
+//
+// 通过UI进入本服副本
+//
+
+message TeamLocalInsInvite
+{
+	// master转发给队内其他队友，发送者必须是队长
+	required int64 roleid       = 1;
+	required int32 ins_group_id = 2;
+}
+
+message TeamLocalInsInviteRe
+{
+	// 队友客户端给的回应，转发给leader
+	required int64 leader_roleid = 1;
+	required int64 member_roleid = 2;
+	required bool  agreement     = 3;
+	required int32 ins_group_id  = 4;
+	repeated int32 ins_tid_array = 5;
+}
+
+message TeamLeaderStartLocalIns
+{
+	// 队长发起副本挑战，通知满足条件的队员
+	required int64 member_roleid = 1;
+	required int32 ins_templ_id  = 2;
+}
+
+message TeammemberQuitLocalIns
+{
+	// 该协议是队员向队长发的
+	required int64 leader_roleid = 1; // 如果队长已经变化，则master不需要转发
+	required int64 member_roleid = 2;
+	required int32 ins_group_id  = 3;
+}
+
+
+//
+// 通过UI进入跨服副本
+//
+
+message TeammemberCrossInsReady
+{
+	required int64 roleid  = 1;
+}
+
+message TeammemberQuitCrossIns
+{
+	required int64 roleid  = 1;
+}
+
+message TeamCrossInsInvite
+{
+    required common.protocol.global.CRInsInviteInfo info = 1;
+}
+
+message TeamCrossInsInviteReply
+{
+    required common.protocol.global.CRInsInviteReplyInfo info = 1;
+}

@@ -1,0 +1,7 @@
+package common.protocol.G2M;
+
+message QueryRoleInfo
+{
+	required int64 querier = 1;				// 查询的玩家
+    repeated int64 role_list = 2;
+}

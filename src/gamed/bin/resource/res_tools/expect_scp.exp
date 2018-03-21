@@ -1,0 +1,20 @@
+#!/usr/bin/expect -f
+set password jthd_team0903
+#upload assets
+spawn scp -r assets.tar.gz mars@182.92.4.223:/home/mars/temp
+set timeout 300
+expect "mars@182.92.4.223's password:"
+set timeout 300
+send "$password\r"
+set timeout 300
+send "exit\r"
+#upload gs
+spawn scp -r gs.tar.gz mars@182.92.4.223:/home/mars/temp
+set timeout 300
+expect "mars@182.92.4.223's password:"
+set timeout 300
+send "$password\r"
+set timeout 300
+send "exit\r"
+#end
+expect eof

@@ -1,0 +1,7 @@
+package common.protocol.M2G;
+
+message AuctionInvalidQuery
+{
+	required int64 roleid = 1;
+	repeated int64 auction_id = 2;
+}

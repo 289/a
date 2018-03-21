@@ -1,0 +1,7 @@
+package common.protocol.G2M;
+
+message SavePlayerData
+{
+	required int64 roleid = 1;
+	required bytes content = 2;
+}

@@ -1,0 +1,72 @@
+import "global/instance_msg.proto";
+
+package common.protocol.global;
+
+message RoomMember
+{
+	required int64 roleid		= 1;
+	required int32 master_id	= 2;
+    required int32 src_world_id = 3;
+    required float src_pos_x = 4;
+    required float src_pos_y = 5;
+    required PCrossInsInfo info = 6;
+}
+
+message EnterInsRequest
+{
+	required int32 ins_templ_id     = 1;
+	required int32 des_world_id     = 2;
+	required int32 src_world_id     = 3;
+	required float src_pos_x        = 4;
+	required float src_pos_y        = 5;
+	repeated RoomMember member_info	= 6;
+}
+
+message EnterInsReply
+{
+	required int64 roleid						= 1;
+	required int64 ins_serial_num				= 2;
+	required int32 ins_templ_id					= 3;
+	required int32 src_world_id					= 4;
+	required float src_pos_x					= 5;
+	required float src_pos_y					= 6;
+	required int32 des_world_id					= 7;
+	required int64 leaderid						= 8;
+	required int32 self_pos						= 9;
+}
+
+message TeammemberInsReady
+{
+	required int64 roleid  = 1;
+}
+
+message TeammemberQuitIns
+{
+	required int64 roleid  = 1;
+}
+
+message InsRoomInfo
+{
+	required int32 roomid			= 1;
+	required int64 receiver			= 2;
+	repeated RoomMember members		= 3;
+}
+
+message InsJoinRoom
+{
+	required int32 pos				= 1;
+	required int64 receiver			= 2;
+	required RoomMember new_member	= 3;
+}
+
+message InsLeaveRoom
+{
+	required int64 leave_roleid		= 1;
+	required int64 receiver			= 2;
+}
+
+message InsMemberReady
+{
+	required int64 receiver = 1;
+	required int64 roleid	= 2;
+}

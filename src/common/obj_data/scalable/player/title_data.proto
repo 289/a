@@ -1,0 +1,11 @@
+package common.scalable;
+
+message TitleData
+{
+    message Entity
+    {
+        required int32 title_id = 1; 
+    }
+
+    repeated Entity title_list = 1;
+}

@@ -1,0 +1,17 @@
+package common.protocol.A2M;
+
+message KeyResponse
+{
+	enum ErrorCode
+	{
+		ERR_SUCCESS = 0;
+		ERR_KEY = 1;
+	}
+
+	required ErrorCode error = 1;
+	required int64 userid = 2;
+	required int32 masterid = 3;
+	required bytes key = 4;
+	required int32 client_sid = 5;
+	required int32 linkid = 6;
+}

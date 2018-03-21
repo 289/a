@@ -1,0 +1,9 @@
+package common.protocol.A2W;
+
+message A2CGamedataSend
+{
+	required int32 cmd_type_no = 1;
+	required int32 client_sid = 2;
+
+	required bytes content     = 3;
+}

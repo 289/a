@@ -1,0 +1,7 @@
+package common.protocol.L2M;
+
+message UserLogout
+{
+	required int64 userid = 1;
+    required int32 client_sid = 2;
+}

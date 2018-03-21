@@ -1,0 +1,12 @@
+package common.protocol.M2G;
+
+message QueryItemInfo
+{
+	required int32 where = 1;				// 物品所在包裹类型
+	required int32 index = 2;				// 物品在包裹中的位置
+	required int32 templ_id = 3;			// 物品的模板ID
+	required int32 link_id = 4;				// 查询者的linkid
+	required int32 client_sid_in_link = 5;	// 查询者的sid
+	required int64 receiver = 6;			// 被查询的玩家
+	required int64 querier = 7;				// 查询的玩家
+}

@@ -1,0 +1,7 @@
+package common.protocol.M2L;
+
+message ErrorMessage
+{
+	required int32 error = 1;
+	required int64 roleid = 2;
+}

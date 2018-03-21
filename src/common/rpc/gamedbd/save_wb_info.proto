@@ -1,0 +1,32 @@
+import "gamedbd/worldboss_info.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SaveWBInfoRequest
+{
+    enum SaveOp
+    {
+        SAVE_MODIFY = 0;
+        SAVE_DEL = 1;
+    }
+    required int32 save_op = 1;
+	repeated WorldBossInfoData info_list = 2;
+}
+
+message SaveWBInfoResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service SaveWBInfoService
+{
+	rpc HandleSaveWBInfo (SaveWBInfoRequest) returns (SaveWBInfoResponse);
+}

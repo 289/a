@@ -1,0 +1,37 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/libauthproto-pb.a
+
+
+SUBDIR       = ./gen/M2A ./gen/A2M ./gen/W2A ./gen/A2W
+M2A_OBJS     = ./gen/M2A/build/*.o
+A2M_OBJS 	 = ./gen/A2M/build/*.o
+W2A_OBJS 	 = ./gen/W2A/build/*.o
+A2W_OBJS 	 = ./gen/A2W/build/*.o
+SUBOBJ       = $(M2A_OBJS) $(A2M_OBJS) $(W2A_OBJS) $(A2W_OBJS)
+
+
+all : authlib
+
+authlib : $(SUBDIR)
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIR): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIR),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIR),$(MAKE) -C $(dir) dep;))
+

@@ -1,0 +1,6 @@
+package common.protocol.global;
+
+message AnnounceMasterInfo
+{
+	required int32 master_id = 1;
+}

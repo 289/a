@@ -1,0 +1,9 @@
+package gamedbRpc;
+
+message WorldBossInfoData
+{
+	required int64 monster_tid = 1;
+	required int32 timestamp = 2;
+	required int32 record_time = 3;
+	required int32 record_count = 4;
+}

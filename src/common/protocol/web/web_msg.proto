@@ -1,0 +1,22 @@
+package agent;
+
+message SysBroadcastMsg
+{
+    required int32 AdminId = 1;
+    required int32 MasterId = 2;
+    required int32 MsgType = 3;
+    required string MsgContent = 4;
+}
+
+message QueryOnlinePlayerNum
+{
+    required int32 AdminId = 1;
+    required int32 MasterId = 2;
+}
+
+message QueryOnlinePlayerNum_Re
+{
+    required int32 AdminId = 1;
+    required int32 MasterId = 2;
+    required int32 OnlineNum = 3;
+}

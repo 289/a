@@ -1,0 +1,28 @@
+import "gamedbd/auction_order.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AuctionStartRequest
+{
+	required AuctionOrder order = 1;
+	required string rpc_id = 2;
+}
+
+message AuctionStartResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 auction_id = 2;
+}
+
+service AuctionStartService
+{
+	rpc HandleAuctionStart (AuctionStartRequest) returns (AuctionStartResponse);
+}

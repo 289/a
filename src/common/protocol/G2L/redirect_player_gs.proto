@@ -1,0 +1,6 @@
+package common.protocol.G2L;
+
+message RedirectPlayerGS
+{
+	required int64 roleid = 1;
+}

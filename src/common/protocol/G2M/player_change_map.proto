@@ -1,0 +1,38 @@
+import "global/player_change_map_data.proto";
+import "global/instance_msg.proto";
+import "global/battleground_msg.proto";
+
+package common.protocol.G2M;
+
+message PlayerChangeMapRequest
+{
+    required int64 userid = 1;
+	required common.protocol.global.PlayerChangeMapData data = 2;
+	optional common.protocol.global.InstanceInfo ins_info    = 3;
+    optional common.protocol.global.BattleGroundInfo bg_info = 4;
+    optional bool need_map_team = 5; // 需要带入大世界组队信息来建立地图队伍
+}
+
+message PlayerChangeMapReply
+{
+	enum ErrCode
+	{
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	required ErrCode errcode   = 1;
+	required int64   userid    = 2;
+	optional int32   errparam  = 3;
+	optional common.protocol.global.PlayerChangeMapData data = 4;
+}
+
+message RedirectEnterWorld
+{
+	required int32 des_world_id = 1;
+	required int64 roleid       = 2;
+	required int32 link_id      = 3;
+	required int32 client_sid_in_link = 4;
+	required bytes content      = 5;
+	required int64 userid       = 6;
+}

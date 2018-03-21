@@ -1,0 +1,32 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SaveRoleDataRequest
+{
+	required int64 userid = 1;
+	required int64 roleid = 2;
+	required int32 reason = 3;
+	required bytes content = 4;
+	required string rpcid = 5;
+}
+
+message SaveRoleDataResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+    required int32 level = 2;
+    required int32 combat_value = 3;
+    required int32 gender = 4;
+    required int32 roleclass = 5;
+}
+
+service SaveRoleDataService
+{
+	rpc HandleSaveRoleData (SaveRoleDataRequest) returns (SaveRoleDataResponse);
+}

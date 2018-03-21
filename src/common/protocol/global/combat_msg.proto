@@ -1,0 +1,16 @@
+package common.protocol.global;
+
+message CombatPVEResult
+{
+    required int64 combat_award_exp = 1;
+    required int64 combat_award_money = 2;
+    required bytes combat_award_items_drop = 3;
+    required bytes combat_award_items_lottery= 4;
+    required bytes combat_mob_killed_list = 5;
+}
+
+message CombatPVPResult
+{
+    required int64 pvp_type = 1;
+    required bytes combat_player_killed_list = 2;
+}

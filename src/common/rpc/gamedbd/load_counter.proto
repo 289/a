@@ -1,0 +1,26 @@
+import "gamedbd/counter.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message LoadCounterRequest
+{
+}
+
+message LoadCounterResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated Counter counter_list = 2;
+}
+
+service LoadCounterService
+{
+	rpc HandleLoadCounter (LoadCounterRequest) returns (LoadCounterResponse);
+}

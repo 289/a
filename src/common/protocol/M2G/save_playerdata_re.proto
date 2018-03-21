@@ -1,0 +1,14 @@
+package common.protocol.M2G;
+
+message SavePlayerData_Re
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		ROLE_NOTFOUND = 2;
+	}
+
+	required ErrorCode error = 1;
+	required int64 roleid = 2;
+}

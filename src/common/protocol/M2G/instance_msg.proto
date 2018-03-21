@@ -1,0 +1,82 @@
+import "global/player_change_map_data.proto";
+import "global/instance_msg.proto";
+
+package common.protocol.M2G;
+
+message ReenterInfo
+{
+	required int32 world_id        = 1;
+	required int32 world_tag       = 2;
+	required int64 ins_create_time = 3;
+}
+
+message EnterInsReply
+{
+	enum ErrCode
+	{
+		SUCCESS = 0;
+		TEAM_INS_NOT_CREATE = 1;
+		INS_NOT_EXIST = 2;
+		ALREADY_HAS_INS = 3;
+	}
+
+	required common.protocol.global.InsEnterType enter_type  = 1;
+	required ErrCode err_code      = 2;
+	required int64 roleid          = 3;
+	required int64 ins_serial_num  = 4;
+	required int32 ins_templ_id    = 5;
+	required int32 src_world_id    = 6;
+	required float src_pos_x       = 7;
+	required float src_pos_y       = 8;
+	required int32 des_world_id    = 9;
+	optional ReenterInfo reenter   = 10;
+	optional common.protocol.global.InstanceInfo.TeamInfo team_info = 11;
+}
+
+message TeammemberLocalInsReply
+{
+	// 客户端给的回应，转发给leader
+	required int64 leader_roleid = 1;
+	required int64 member_roleid = 2;
+	required bool  agreement     = 3;
+	required int32 ins_group_id  = 4;
+	repeated int32 ins_tid_array = 5;
+}
+
+message TeamLeaderStartLocalIns
+{
+	// 队长发起挑战，转发给满足条件的队员
+	required int64 member_roleid = 1;
+	required int32 ins_templ_id  = 2;
+}
+
+message TeammemberQuitLocalIns
+{
+	// 发给队长
+	required int64 leader_roleid = 1;
+	required int64 member_roleid = 2;
+	required int32 ins_group_id  = 3;
+}
+
+message TeamLocalInsInvite
+{
+	// 队长向队员发起邀请，转给对应的gs
+	required int64 member_roleid = 1;
+	required int64 leader_roleid = 2;
+	required int32 ins_group_id  = 3;
+}
+
+
+//
+// 通过UI进入跨服副本
+//
+message TeamCrossInsInvite
+{
+    required int64 member_roleid = 1;
+    required common.protocol.global.CRInsInviteInfo info = 2;
+}
+
+message TeamCrossInsInviteReply
+{
+    required common.protocol.global.CRInsInviteReplyInfo info = 1;
+}

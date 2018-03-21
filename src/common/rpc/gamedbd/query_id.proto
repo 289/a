@@ -1,0 +1,27 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message QueryIdRequest
+{
+	required int64 querier = 1;
+	required int32 type = 2;
+	required bytes name = 3;
+}
+
+message QueryIdResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 roleid = 2;
+}
+
+service QueryIdService
+{
+	rpc HandleQueryId (QueryIdRequest) returns (QueryIdResponse);
+}

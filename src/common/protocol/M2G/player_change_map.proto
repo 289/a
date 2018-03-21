@@ -1,0 +1,32 @@
+import "global/player_change_map_data.proto";
+import "global/instance_msg.proto";
+import "global/battleground_msg.proto";
+import "M2G/team_msg.proto";
+
+
+package common.protocol.M2G;
+
+message PlayerChangeMap
+{
+	required int64 userid = 1;
+	required common.protocol.global.PlayerChangeMapData data = 2;
+	optional TeamInfo team_info = 3;
+	optional common.protocol.global.InstanceInfo ins_info = 4;
+    optional common.protocol.global.BattleGroundInfo bg_info = 5;
+    optional MapTeamInfo map_team_info = 6;
+}
+
+message PlayerChangeMapError
+{
+	enum ErrCode
+	{
+		ERR_MAP_NOT_FOUND = 1;
+		DEST_GS_FAILURE   = 2;   // 目标gs返回错误
+	}
+
+	required ErrCode errcode    = 1;
+	required int32   errparam   = 2;
+	required int64   userid     = 3;
+	required common.protocol.global.PlayerChangeMapData data = 4;
+	optional TeamInfo team_info = 5;
+}

@@ -1,0 +1,26 @@
+import "gamedbd/counter.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SaveCounterRequest
+{
+	repeated Counter counter_list = 1;
+}
+
+message SaveCounterResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service SaveCounterService
+{
+	rpc HandleSaveCounter (SaveCounterRequest) returns (SaveCounterResponse);
+}

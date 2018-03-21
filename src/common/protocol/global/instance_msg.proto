@@ -1,0 +1,67 @@
+package common.protocol.global;
+
+enum InsEnterType
+{
+	ET_INS_CREATE  = 1;
+	ET_INS_ENTER   = 2;
+	ET_INS_ENTER_CREATE = 3; // 进入的同时创建副本，该项将不扣除副本的创建条件
+	ET_INS_REENTER = 4;
+}
+
+message InstanceInfo
+{
+	message TeamInfo
+	{
+		required int64 leader   = 1; // 队长的id
+		required int32 self_pos = 2; // 自己在队伍中的位置
+	}
+
+	required InsEnterType enter_type = 1;
+	required int64 ins_serial_num    = 2;
+	required int32 ins_templ_id      = 3;
+	required int32 world_id          = 4;
+	required int32 world_tag         = 5;
+	required int64 ins_create_time   = 6;
+	required int32 src_world_id      = 7;
+	required float src_pos_x         = 8;
+	required float src_pos_y         = 9;
+	optional TeamInfo team_info      = 10;
+}
+
+// player cross-realm instance info
+message PCrossInsInfo
+{
+	required int32 gender       = 4;
+	required int32 level        = 5;
+	required int32 weapon_id    = 6;
+	required int32 combat_value = 7;
+	required int32 role_class   = 8;
+	required bytes first_name   = 9;
+	required bytes mid_name     = 10;
+	required bytes last_name    = 11;
+}
+
+// cross ins invite info
+message CRInsInviteInfo
+{
+	// master转发给队内其他队友的gs，发送者必须是队长
+	required int64 leader_roleid = 1; // 队长id
+	required int32 ins_group_id  = 2;
+    required int32 ins_templ_id  = 3;
+}
+
+// cross ins invite reply info
+message CRInsInviteReplyInfo
+{
+	// 队友客户端给的回应，转发给leader所在的gs
+	required int64 leader_roleid  = 1;
+	required int64 member_roleid  = 2;
+    required bool  match_cond     = 3; // 是否满足进入条件，包括副本条件及自身状态条件
+	required bool  agreement      = 4;
+    required int32 ins_group_id   = 5;
+    required int32 ins_templ_id   = 6;
+    required int32 src_world_id   = 7;
+    required float src_pos_x      = 8;
+    required float src_pos_y      = 9;
+    optional PCrossInsInfo detail = 10;
+}

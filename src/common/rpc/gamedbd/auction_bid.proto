@@ -1,0 +1,31 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AuctionBidRequest
+{
+	required int64 auction_id = 1;
+	required int64 bidder = 2;
+	required int32 price = 3;
+	required string rpc_id = 4;
+}
+
+message AuctionBidResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NO_AUCTION = 2;
+		PRICE_ERROR = 3;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int32 cur_bid_price = 2;
+	required int32 cur_bidder = 3;
+}
+
+service AuctionBidService
+{
+	rpc HandleAuctionBid (AuctionBidRequest) returns (AuctionBidResponse);
+}

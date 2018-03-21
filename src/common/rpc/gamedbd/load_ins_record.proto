@@ -1,0 +1,26 @@
+import "gamedbd/ins_record.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message LoadInsRecordRequest
+{
+}
+
+message LoadInsRecordResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated InsRecord record_list = 2;
+}
+
+service LoadInsRecordService
+{
+	rpc HandleLoadInsRecord (LoadInsRecordRequest) returns (LoadInsRecordResponse);
+}

@@ -1,0 +1,31 @@
+package common.protocol.global;
+
+// 补签，master转发给friend_roleid
+message RePunchCardHelp
+{
+    required int64 requester       = 1;
+    required int64 friend_roleid   = 2;
+    required int32 req_link_id     = 3;
+    required int32 req_sid_in_link = 4;
+    required int32 day_of_month    = 5;
+    required bytes first_name      = 6;
+    required bytes mid_name        = 7;
+    required bytes last_name       = 8;
+}
+
+// 补签的回应，master转发给requester
+// 如果requester不在线则master发一个RePunchCardHelpError给friend_roleid
+message RePunchCardHelpReply
+{
+    required int64 requester       = 1;
+    required int64 friend_roleid   = 2;
+    required int32 day_of_month    = 3;
+}
+
+// 补签帮忙后，请求补签的人已经有人帮忙补签，则回个错误让该好友的补签次数加回去
+// master转发给friend_roleid
+message RePunchCardHelpError
+{
+    required int64 requester       = 1;
+    required int64 friend_roleid   = 2;
+}

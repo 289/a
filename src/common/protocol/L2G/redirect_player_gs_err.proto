@@ -1,0 +1,13 @@
+package common.protocol.L2G;
+
+message RedirectPlayerGSError
+{
+	enum ErrCode
+	{
+		PLAYER_DISCONNECTED = 1;
+	}
+
+	required int64 roleid    = 1;
+	required int32 linkid    = 2;
+	required ErrCode errCode = 3;
+}

@@ -1,0 +1,36 @@
+package common.protocol.M2G;
+
+message GetMailAttach_Re
+{
+	required int64 roleid = 1;
+	required int64 mailid = 2;
+	required int32 attach_cash = 3;
+	required int32 attach_score = 4;
+	required bytes attach_item = 5;
+}
+
+message DeleteMail_Re
+{
+	required int64 roleid = 1;
+	required int64 mailid = 2;
+}
+
+message SendMail_Re
+{
+	required int64 roleid = 1;
+	required int64 mailid = 2;
+}
+
+message AnnounceNewMail
+{
+	required int64 mailid = 1;
+	required int64 sender = 2;
+	required int64 receiver = 3;
+	required int32 attach_cash = 4;
+	required int32 attach_score = 5;
+	required bytes name = 6;
+	required bytes title = 7;
+	required bytes content = 8;
+	required bytes attach_item = 9;
+	required int32 time = 10;
+}

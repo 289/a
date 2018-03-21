@@ -1,0 +1,6 @@
+package common.protocol.L2M;
+
+message AnnounceLinkInfo
+{
+	required int32 link_id = 1;
+}

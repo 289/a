@@ -1,0 +1,26 @@
+import "gamedbd/ins_record.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SaveInsRecordRequest
+{
+	repeated InsRecord record_list = 2;
+}
+
+message SaveInsRecordResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service SaveInsRecordService
+{
+	rpc HandleSaveInsRecord (SaveInsRecordRequest) returns (SaveInsRecordResponse);
+}

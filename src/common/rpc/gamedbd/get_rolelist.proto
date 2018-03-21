@@ -1,0 +1,28 @@
+import "gamedbd/role_info.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message GetRoleListRequest
+{
+	required int64 userid = 1;
+	required int32 masterid = 2;
+}
+
+message GetRoleListResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated RoleInfo rolelist = 2;
+}
+
+service GetRoleListService
+{
+	rpc HandleGetRoleList (GetRoleListRequest) returns (GetRoleListResponse);
+}

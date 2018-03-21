@@ -1,0 +1,14 @@
+package common.protocol.A2M;
+
+message KickoutUser
+{
+	enum ReasonCode
+	{
+		OTHER_LOGIN = 0;
+	}
+
+	required ReasonCode reason = 1;
+	required int64 userid = 2;
+    required int32 linkid = 3;
+    required int32 client_sid = 4;
+}

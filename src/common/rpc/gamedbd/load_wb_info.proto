@@ -1,0 +1,26 @@
+import "gamedbd/worldboss_info.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message LoadWBInfoRequest
+{
+}
+
+message LoadWBInfoResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated WorldBossInfoData info_list = 2;
+}
+
+service LoadWBInfoService
+{
+	rpc HandleLoadWBInfo (LoadWBInfoRequest) returns (LoadWBInfoResponse);
+}

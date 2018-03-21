@@ -1,0 +1,12 @@
+package common.protocol.M2L;
+
+message M2CGamedataSend
+{
+	required int32 cmd_type_no = 1;
+	required int64 userid      = 2;
+	required int64 roleid      = 3;
+	required int32 link_id     = 4;
+	required int32 client_sid_in_link = 5;
+
+	required bytes content     = 6;
+}

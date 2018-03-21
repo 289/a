@@ -1,0 +1,24 @@
+package common.protocol.global;
+
+message ConnectionInfo
+{
+	enum Type
+	{
+		DEFAULT_NONE    = 0;
+		LINK_CONN       = 1;
+		MASTER_CONN     = 2;
+		GAMESERVER_CONN = 3;
+	}
+}
+
+message ConnectEstablished
+{
+	required ConnectionInfo.Type type = 1 [default = DEFAULT_NONE];
+}
+
+message ConnectDestroyed
+{
+	required ConnectionInfo.Type type = 1 [default = DEFAULT_NONE];
+	optional int32 linkid = 2;
+	optional int32 masterid = 3;
+}

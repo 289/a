@@ -1,0 +1,11 @@
+package common.protocol.L2G;
+
+message C2SGamedataSend
+{
+	required int32 cmd_type_no = 1;
+	required int64 roleid      = 2;
+	required int32 link_id     = 3;
+	required int32 client_sid_in_link = 4;
+
+	optional bytes content     = 5;
+}

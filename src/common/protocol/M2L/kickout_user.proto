@@ -1,0 +1,14 @@
+package common.protocol.M2L;
+
+message KickoutUser
+{
+	enum ReasonCode
+	{
+		OTHER_LOGIN = 0;
+		FORBID = 1;
+		ABNORMAL_LOGOUT = 2;
+	}
+
+	required ReasonCode reason = 1;
+	required int32 client_sid = 2;
+}

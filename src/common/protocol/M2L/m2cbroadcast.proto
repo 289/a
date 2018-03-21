@@ -1,0 +1,9 @@
+package common.protocol.M2L;
+
+message M2CBroadcast
+{
+	required int32 cmd_type_no      = 1;
+	required int32 link_id          = 2;
+	required bytes content          = 3;
+	required int64 sender			= 4;
+}

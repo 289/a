@@ -1,0 +1,38 @@
+package masterRpc;
+
+option cc_generic_services = true;
+
+enum AuctionCurrencyType
+{
+    ACT_SCORE = 0; // 学分
+    ACT_CASH  = 1; // 元宝
+}
+
+message AuctionStartProxyRequest
+{
+	required int64 seller = 1;
+	required int32 currency_type = 2;
+	required int32 buyout_price = 3;
+	required int32 bid_price = 4;
+	required int32 item_id = 5;
+	required bytes item_name = 6;
+	required bytes item_info = 7;
+}
+
+message AuctionStartProxyResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		PARAM_ERR = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 auction_id = 2;
+}
+
+service AuctionStartProxyService
+{
+	rpc HandleAuctionStartProxy (AuctionStartProxyRequest) returns (AuctionStartProxyResponse);
+}

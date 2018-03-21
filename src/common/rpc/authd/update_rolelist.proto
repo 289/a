@@ -1,0 +1,32 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message UpdateRoleListRequest
+{
+	required int64 userid = 1;
+	required int64 roleid = 2;
+	required string rolename = 3;
+	required int32 occupation = 4;
+	required int32 level = 5;
+	required int32 serverid = 6;
+	required int32 link_sid = 7;
+	required int32 client_sid = 8;
+}
+
+message UpdateRoleListResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		ROLEID_EXIST = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service UpdateRoleListService
+{
+	rpc UpdateRoleList (UpdateRoleListRequest) returns (UpdateRoleListResponse);
+}

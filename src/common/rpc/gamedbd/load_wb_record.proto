@@ -1,0 +1,26 @@
+import "gamedbd/wb_record.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message LoadWBRecordRequest
+{
+}
+
+message LoadWBRecordResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	repeated WBRecord record_list = 2;
+}
+
+service LoadWBRecordService
+{
+	rpc HandleLoadWBRecord (LoadWBRecordRequest) returns (LoadWBRecordResponse);
+}

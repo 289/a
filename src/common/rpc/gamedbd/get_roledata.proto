@@ -1,0 +1,37 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message GetRoleDataRequest
+{
+	required int64 roleid = 1;
+	required int64 userid = 2;
+}
+
+message GetRoleDataResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+    enum EnterType
+    {
+        ENTER_NORMAL = 0;
+        ENTER_INS = 1;
+        ENTER_BG = 2;
+    }
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+    required EnterType enter_type = 2;
+    required int32 world_id = 3;
+    required int32 world_tag = 4;
+    optional int64 enter_sn = 5;
+	required bytes content = 6;
+}
+
+service GetRoleDataService
+{
+	rpc HandleGetRoleData (GetRoleDataRequest) returns (GetRoleDataResponse);
+}

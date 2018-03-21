@@ -1,0 +1,20 @@
+package common.protocol.M2L;
+
+message QueryRoleInfo_Re
+{
+	enum ErrorCode
+	{
+		QUERY_SUCC = 0;
+		QUERY_ERROR = 1;
+	}
+
+	message RoleInfo
+	{
+		required int64 roleid = 1;
+		required string rolename = 2;
+	}
+
+	required ErrorCode error = 1;
+	required RoleInfo roleinfo = 2;
+	required int32 client_sid = 3;
+}

@@ -1,0 +1,40 @@
+package logsrv;
+
+message LogMessage
+{
+	enum MessageType
+	{
+		AU_TYPE     = 1;
+		GW_TYPE     = 2;
+		DB_TYPE     = 3;
+		GS_TYPE     = 4;
+		LINK_TYPE   = 5;
+		MASTER_TYPE = 6;
+		MATCH_TYPE	= 7;
+	}
+
+	enum LogLevel
+	{
+		TRACE = 1;
+		DEBUG = 2;
+		INFO  = 3;
+		WARN  = 4;
+		ERROR = 5;
+		FATAL = 6;
+	}
+
+	required MessageType type = 1;
+	required int32 id         = 2;
+	required LogLevel level   = 3;
+	required bytes msg        = 4;
+}
+
+message LogServerStop
+{
+	enum StopReason
+	{
+		NORMAL_EXIT = 0;
+	};
+
+	required  StopReason reason = 1;
+}

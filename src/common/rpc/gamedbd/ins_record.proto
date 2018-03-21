@@ -1,0 +1,7 @@
+package gamedbRpc;
+
+message InsRecord
+{
+	required int64 key = 1;
+	required bytes content = 2;
+}

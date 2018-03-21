@@ -1,0 +1,54 @@
+//import "global/instance_msg.proto";
+
+package common.protocol.G2M;
+
+enum BGType
+{
+	BGT_PVE_RALLY      = 1; // PVE活动战场
+    BGT_PVE_WORLD_BOSS = 2; // PVE世界BOSS战场（本服）
+}
+
+enum BGRequestType
+{
+	BGRT_UI_PVE_RALLY  = 1; // 通过UI进入PVE战场，由master直接丢进去，不用过排队服务器
+}
+
+message NotifyBGStatus
+{
+	enum BGStatus
+	{
+		BG_CREATE = 1;
+		BG_CLOSE  = 2;
+	};
+
+	required BGType bg_type        = 1;
+	required BGStatus bg_status    = 2;
+	required int32 world_id        = 3;
+	required int32 world_tag       = 4;
+	required int32 bg_templ_id     = 5;
+	required int64 bg_create_time  = 6;
+	required int64 bg_serial_num   = 7;
+    required int32 bg_player_max   = 8;  // 战场玩家人数上限
+    required int32 supplement_time = 9;  // 战场允许补人的时间，单位秒，绝对时间
+}
+
+message NotifyBGPlayerCount
+{
+	required int64 bg_serial_num   = 1;
+    required int32 world_id        = 2;
+	required int32 world_tag       = 3;
+    required int32 player_count    = 4;  // 战场里当前玩家数量
+}
+
+message EnterBGRequest
+{
+	required int32 des_world_id       = 1;
+	required BGType bg_type           = 2;
+	required BGRequestType req_type   = 3;
+	required int64 roleid             = 4;
+	required int32 bg_templ_id        = 5;
+	required int32 src_world_id       = 6;
+	required float src_pos_x          = 7;
+	required float src_pos_y          = 8;
+}
+

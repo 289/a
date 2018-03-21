@@ -1,0 +1,18 @@
+package common.protocol.G2M;
+
+message GetMailAttach
+{
+	required int64 roleid = 1;
+	required int64 mailid = 2;
+}
+
+message SendMail
+{
+	required int64 sender = 1;
+	required int64 receiver = 2;
+	required int32 attach_score = 3;
+	required bytes name = 4;
+	required bytes title = 5;
+	required bytes content = 6;
+	required bytes attach_item = 7;
+}

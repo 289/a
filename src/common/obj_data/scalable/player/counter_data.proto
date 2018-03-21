@@ -1,0 +1,12 @@
+package common.scalable;
+
+message CounterData
+{
+    message Entry
+    {
+        required int32 tid   = 1; 
+        required int32 value = 2;
+    }
+
+    repeated Entry counter_list = 1;
+}

@@ -1,0 +1,10 @@
+package common.protocol.M2A;
+
+message KeyRequest
+{
+	required int64 userid = 1;
+	required int32 masterid = 2;
+	required bytes imei = 3;
+	required int32 client_sid = 4;
+	required int32 linkid = 5;
+}

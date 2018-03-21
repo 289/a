@@ -1,0 +1,26 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message CreateRoleRequest
+{
+	required int64 userid = 1;
+	required int32 masterid = 2;
+}
+
+message CreateRoleResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 roleid = 2;
+}
+
+service CreateRoleService
+{
+	rpc HandleCreateRole (CreateRoleRequest) returns (CreateRoleResponse);
+}

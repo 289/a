@@ -1,0 +1,36 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+enum NameType
+{
+	NAME_FIRST = 0;
+	NAME_MID = 1;
+	NAME_LAST = 2;
+}
+
+message ChangeRoleNameRequest
+{
+	required int64 roleid = 1;
+	required NameType type = 2 [default = NAME_FIRST];
+	required bytes name = 3;
+	required string rpcid = 4;
+}
+
+message ChangeRoleNameResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		ROLE_NOTFOUND = 2;
+		NAME_EXIST = 3;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service ChangeRoleNameService
+{
+	rpc HandleChangeRoleName (ChangeRoleNameRequest) returns (ChangeRoleNameResponse);
+}

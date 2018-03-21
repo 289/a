@@ -1,0 +1,26 @@
+package common.protocol.global;
+
+// 本文件用于GS的运行时命令工具
+
+
+///
+/// 工具向GS发的协议
+///
+message HelloGameServer
+{
+	required bytes content = 1;
+}
+
+message GameServerCmd
+{
+	required bytes cmd = 1;
+}
+
+
+///
+/// GS向工具发的协议
+///
+message GSExecuteMessage
+{
+	required bytes message = 1;
+}

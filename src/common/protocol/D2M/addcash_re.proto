@@ -1,0 +1,7 @@
+package common.protocol.D2M;
+
+message AddCashRe
+{
+	required int64 roleid = 1;
+	required int32 cash = 2;
+}

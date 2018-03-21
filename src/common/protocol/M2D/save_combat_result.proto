@@ -1,0 +1,16 @@
+import "global/combat_msg.proto";
+
+package common.protocol.M2D;
+
+message SaveCombatResult
+{
+	required int64 roleid = 1;
+	required int32 unit_id = 2;
+	required int32 combat_id = 3;
+    required int32 combat_type = 4;
+	required int32 combat_result = 5;
+	required int32 combat_remain_hp = 6;
+    required int32 combat_pet_power = 7;
+    optional global.CombatPVEResult pve_result = 8;
+    optional global.CombatPVPResult pvp_result = 9;
+}

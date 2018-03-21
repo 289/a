@@ -1,0 +1,29 @@
+import "gamedbd/role_info.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message DeleteRoleRequest
+{
+	required int64 userid = 1;
+	required int64 roleid = 2;
+	required int32 masterid = 3;
+	optional RoleInfo role = 4;
+}
+
+message DeleteRoleResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service DeleteRoleService
+{
+	rpc HandleDeleteRole (DeleteRoleRequest) returns (DeleteRoleResponse);
+}

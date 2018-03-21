@@ -1,0 +1,7 @@
+package gamedbRpc;
+
+message RankEntry
+{
+    required int64 entry_id = 1;
+    required int32 entry_value = 2;
+}

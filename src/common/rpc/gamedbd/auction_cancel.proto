@@ -1,0 +1,30 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message AuctionCancelRequest
+{
+	required int64 auction_id = 1;
+	required string rpc_id = 2;
+}
+
+message AuctionCancelResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NO_AUCTION = 2;
+		PARAM_ERR = 3;
+		AUCTION_BID = 4;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+    optional int64 bidder = 2;
+    optional int32 cur_bid_price = 3;
+}
+
+service AuctionCancelService
+{
+	rpc HandleAuctionCancel (AuctionCancelRequest) returns (AuctionCancelResponse);
+}

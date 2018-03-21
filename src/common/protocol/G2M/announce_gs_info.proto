@@ -1,0 +1,13 @@
+package common.protocol.G2M;
+
+message AnnounceGSInfo
+{
+	message WorldInfo
+	{
+		required int32 world_id  = 1;
+		required int32 world_tag = 2;
+	}
+
+	required int32 gsid           = 1;
+	repeated WorldInfo world_info = 2;
+}

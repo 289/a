@@ -1,0 +1,31 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message UserLoginRequest
+{
+	required string username = 1;
+	required string password = 2;
+	required string imei = 3;
+	required string session_key = 4;
+	required int32 client_sid = 5;
+}
+
+message UserLoginResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		NAME_PASSWORD_ERROR = 1;
+		ALREADY_LOGIN = 2;
+		DB_BUSY = 3;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 userid = 2;
+}
+
+service UserLoginService
+{
+	rpc HandleLogin (UserLoginRequest) returns (UserLoginResponse);
+}

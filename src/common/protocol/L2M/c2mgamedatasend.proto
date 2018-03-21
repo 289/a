@@ -1,0 +1,10 @@
+package common.protocol.L2M;
+
+message C2MGamedataSend
+{
+	required int32 cmd_type_no = 1;
+	required int64 userid = 2;
+	required int64 roleid = 3;
+
+	optional bytes content = 4;
+}

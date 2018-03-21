@@ -1,0 +1,21 @@
+package common.protocol.G2M;
+
+message PlayerAbnormalLogout
+{
+	enum LogoutCode
+	{
+		PLAYER_ALREADY_LOGIN    = 1;
+		PLAYER_ALLOC_ERR        = 2;
+		PLAYER_DATA_INIT_ERR    = 3;
+		ROLE_ID_NOT_EQUAL       = 4;
+		PLAYER_MODULE_INS_ERR   = 5;
+		WORLD_NOT_IN_THIS_GS    = 6;
+		SAVE_TO_DB_ERR          = 7;
+		PLAYER_FATAL_ERR        = 8;
+		PLAYER_POS_INVALID      = 9;
+		UNKNOWN_ERR             = 10;
+	}
+
+	required int64 roleid = 1;
+	required LogoutCode logout_code = 2;
+}

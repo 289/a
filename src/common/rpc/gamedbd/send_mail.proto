@@ -1,0 +1,32 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message SendMailRequest
+{
+	required int64 sender = 1;
+	required int64 receiver = 2;
+	required int32 attach_cash = 3;
+	required int32 attach_score = 4;
+	required bytes name = 5;
+	required bytes title = 6;
+	required bytes content = 7;
+	required bytes attach_item = 8;
+}
+
+message SendMailResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int64 mailid = 2;
+}
+
+service SendMailService
+{
+	rpc HandleSendMail (SendMailRequest) returns (SendMailResponse);
+}

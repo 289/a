@@ -1,0 +1,34 @@
+package common.protocol.G2M;
+
+message QueryTeamInfo
+{
+	required int64 roleid = 1;
+}
+
+message JoinTeam
+{
+	required int64 roleid = 1;
+	required int64 other_roleid = 2;
+}
+
+message JoinTeamRes
+{
+	required int64 roleid = 1;
+	required int32 invite = 2;
+	required int32 accept = 3;
+	required int64 requester = 4;
+}
+
+message LeaveTeam
+{
+	required int64 roleid = 1;
+}
+
+message ConveneTeammate
+{
+    // master广播给队内所有其他成员
+    required int64 leaderid = 1; // 只能由队长发起召集队员的命令
+    required int32 world_id = 2;
+    required float pos_x    = 3;
+    required float pos_y    = 4;
+}

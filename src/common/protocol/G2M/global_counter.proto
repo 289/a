@@ -1,0 +1,13 @@
+package common.protocol.G2M;
+
+message ModifyGlobalCounter
+{
+	required int32 index = 1;
+	required int32 delta = 2; // 变化的值，正数表示增加，负数表示减少
+}
+
+message SetGlobalCounter
+{
+    required int32 index = 1;
+    required int32 value = 2; // 赋值
+}

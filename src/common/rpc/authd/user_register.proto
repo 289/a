@@ -1,0 +1,27 @@
+package authRpc;
+
+option cc_generic_services = true;
+
+message UserRegisterRequest
+{
+	required string username = 1;
+	required string password = 2;
+	required int32 client_sid = 3;
+}
+
+message UserRegisterResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		USER_EXIST = 1;
+		DB_BUSY = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service UserRegisterService
+{
+	rpc HandleRegister (UserRegisterRequest) returns (UserRegisterResponse);
+}

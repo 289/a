@@ -1,0 +1,17 @@
+package common.protocol.G2M;
+
+message ChatMsg
+{
+	enum ChannelType
+	{
+		CHANNEL_WORLD = 1;
+		CHANNEL_TEAM = 2;
+        CHANNEL_PRIVATE = 3;
+	}
+
+	required ChannelType channel = 1;
+	required int64 sender = 2;
+	required bytes sender_name = 3;
+	required int64 receiver = 4;
+	required bytes msg = 5;
+}

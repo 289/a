@@ -1,0 +1,27 @@
+import "gamedbd/rank_entry.proto";
+
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message RankListSaveRequest
+{
+    required int32 type = 1;
+	repeated RankEntry rank_list = 2;
+}
+
+message RankListSaveResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service RankListSaveService
+{
+	rpc HandleRankListSave (RankListSaveRequest) returns (RankListSaveResponse);
+}

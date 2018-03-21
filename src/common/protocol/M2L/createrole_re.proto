@@ -1,0 +1,15 @@
+package common.protocol.M2L;
+
+message CreateRole_Re
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		NAME_EXIST = 2;
+	}
+
+	required ErrorCode error = 1;
+	required int64 roleid = 2;
+	required int32 client_sid = 3;
+}

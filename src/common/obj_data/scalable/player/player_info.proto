@@ -1,0 +1,14 @@
+package common.scalable;
+
+// 玩家的简要信息
+message PlayerBriefInfo
+{
+    required int64 roleid        = 1;
+    required bytes first_name    = 2;
+    required bytes mid_name      = 3;
+    required bytes last_name     = 4;
+    required int32 level         = 5;
+    required int32 cls           = 6;
+    required int32 combat_value  = 7;
+    required int32 gender        = 8;
+}

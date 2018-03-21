@@ -1,0 +1,23 @@
+import "global/combat_msg.proto";
+
+package common.protocol.G2M;
+
+message SaveCombatResult
+{
+    enum CombatType
+    {
+        COMBAT_TYPE_INVALID = 0;
+        COMBAT_TYPE_PVE = 1;
+        COMBAT_TYPE_PVP = 2;
+    }
+
+	required int64 roleid = 1;
+	required int32 unit_id = 2;
+	required int32 combat_id = 3;
+    required int32 combat_type = 4;
+	required int32 combat_result = 5;
+	required int32 combat_remain_hp = 6;
+    required int32 combat_pet_power = 7;
+    optional global.CombatPVEResult pve_result = 8;
+    optional global.CombatPVPResult pvp_result = 9;
+}

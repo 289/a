@@ -1,0 +1,28 @@
+package gamedbRpc;
+
+option cc_generic_services = true;
+
+message GetMailAttachRequest
+{
+	required int64 roleid = 1;
+	required int64 mailid = 2;
+}
+
+message GetMailAttachResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+	required int32 attach_cash = 2;
+	required int32 attach_score = 3;
+	required bytes attach_item = 4;
+}
+
+service GetMailAttachService
+{
+	rpc HandleGetMailAttach (GetMailAttachRequest) returns (GetMailAttachResponse);
+}

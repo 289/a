@@ -1,0 +1,26 @@
+package masterRpc;
+
+option cc_generic_services = true;
+
+message AddCashProxyRequest
+{
+	required int64 roleid = 1;
+	required int32 cash = 2;
+}
+
+message AddCashProxyResponse
+{
+	enum ErrorCode
+	{
+		NO_ERROR = 0;
+		DB_BUSY = 1;
+		PARAM_ERR = 2;
+	}
+
+	required ErrorCode error = 1 [default = NO_ERROR];
+}
+
+service AddCashProxyService
+{
+	rpc HandleAddCashProxy (AddCashProxyRequest) returns (AddCashProxyResponse);
+}

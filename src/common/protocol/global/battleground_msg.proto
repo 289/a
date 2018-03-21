@@ -1,0 +1,28 @@
+package common.protocol.global;
+
+enum BGEnterType
+{
+	ET_BG_ENTER_CREATE = 1; // 进入的同时创建战场
+	ET_BG_REENTER = 2;      // 断线后重入
+}
+
+message BattleGroundInfo
+{
+    message TeamInfo
+	{
+		required int64 leader   = 1; // 队长的id
+		required int32 self_pos = 2; // 自己在队伍中的位置
+	}
+
+	required BGEnterType enter_type = 1;
+	required int64 bg_serial_num    = 2;
+	required int32 bg_templ_id      = 3;
+	required int32 world_id         = 4;
+	required int32 world_tag        = 5;
+	required int64 bg_create_time   = 6;
+	required int32 src_world_id     = 7;
+	required float src_pos_x        = 8;
+	required float src_pos_y        = 9;
+	optional TeamInfo team_info     = 10; // 先不用填
+}
+

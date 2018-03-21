@@ -1,0 +1,10 @@
+package gamedbRpc;
+
+message WBRecord
+{
+	required int32 monsterid = 1;
+	required int64 roleid = 2;
+	required int32 timestamp = 3;
+	required int32 damage = 4;
+	required bytes pinfo = 5;
+}

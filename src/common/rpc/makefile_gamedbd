@@ -1,0 +1,35 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/libgamedbdrpc-pb.a
+
+
+SUBDIRS       = ./gen/gamedbd
+GAMEDBD_OBJS  = ./gen/gamedbd/build/*.o
+SUBOBJ       = $(GAMEDBD_OBJS)
+
+
+all : gamedbdlib
+
+gamedbdlib : $(SUBDIRS)
+	mkdir -p ./lib
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIRS): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) dep;))
+

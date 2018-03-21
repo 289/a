@@ -1,0 +1,37 @@
+SOLUTION_ROOT_DIR = ../..
+
+SINGLE_THREAD = false
+DEBUG_VERSION = true
+
+USE_SELF_CLEAN_OPT = true
+
+SLIB_NAME = ./lib/liblinkproto-pb.a
+
+
+SUBDIRS      = ./gen/L2M ./gen/M2L ./gen/G2L ./gen/L2G
+L2M_OBJS     = ./gen/L2M/build/*.o
+M2L_OBJS     = ./gen/M2L/build/*.o
+G2L_OBJS     = ./gen/G2L/build/*.o
+L2G_OBJS     = ./gen/L2G/build/*.o
+SUBOBJ       = $(L2M_OBJS) $(M2L_OBJS) $(G2L_OBJS) $(L2G_OBJS)
+
+
+all : linklib
+
+linklib : $(SUBDIRS)
+	$(AR) crs $(SLIB_NAME) $(SUBOBJ)
+
+$(SUBDIRS): FORCE
+	cd $@; make
+	
+
+FORCE:
+
+clean: FORCE
+	rm -rf $(CLEAN_BUILD) $(SLIB_NAME);
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) clean;))
+
+depend: FORCE
+	make dep;
+	-($(foreach dir,$(SUBDIRS),$(MAKE) -C $(dir) dep;))
+
